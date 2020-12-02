@@ -6,13 +6,11 @@ Team Project
 개발기간 : 2020.06.22 ~ 2020.07.17
 
 # Skills
-* JAVA
-* JSP/Servlet
-* JavaScript
-* SQL
-![Github Badge](https://img.shields.io/badge/-Oracle-327da8)
-* HTML/CSS
-* Git
+* ![Github Badge](https://img.shields.io/badge/-JAVA-red)
+* ![Github Badge](https://img.shields.io/badge/-JSP/Servlet-brightgreen)
+* ![Github Badge](https://img.shields.io/badge/-Javascript-yellow)
+* ![Github Badge](https://img.shields.io/badge/-Oracle-327da8)
+* ![Github Badge](https://shields.io/badge/-HTML/CSS-ff69b4)
 
 
 
