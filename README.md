@@ -7,7 +7,7 @@
 <br><br><br><br>
 ## STOCKer
 Team Project
-<br><br><br>
+<br>
 ### Overview
 스타벅스MD 물류회사 ERP System   
 2020.06.22 ~ 2020.07.17
@@ -24,7 +24,7 @@ Team Project
 * 거래관리
 * 통계
 * 결제진행
-<br><br><br>
+<br>
 ### Feature
 * 캘린더 API
 * 날씨 API
