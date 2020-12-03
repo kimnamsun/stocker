@@ -2,7 +2,8 @@
 1. [About Project](#STOCKer)
   - [Overview](#Overview)
 2. [Skills](#Skills)
-4. [Features](#Features)
+4. [Menu](#Menu)
+   - [Feature](#Feature)
 <br><br><br><br>
 ## STOCKer
 Team Project
@@ -18,5 +19,15 @@ Team Project
 * ![Github Badge](https://img.shields.io/badge/-Oracle-327da8)
 * ![Github Badge](https://shields.io/badge/-HTML/CSS-ff69b4)
 <br><br><br>
-## Features
-* 
+## Menu
+* 상품관리
+* 거래관리
+* 통계
+* 결제진행
+<br><br><br>
+### Feature
+* 캘린더 API
+* 날씨 API
+* QR코드 생성
+* 엑셀업로드, 다운로드
+* 메일보내기
