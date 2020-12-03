@@ -1,24 +1,28 @@
 # Table of Contents
 1. [About Project](#STOCKer)
-2. [Overview](#Overview)
-3. [Skills](#Skills)
+  - [Overview](#Overview)
+2. [Skills](#Skills)
 4. [Features](#Features)
 
 
-
-# STOCKer
+## STOCKer
 Team Project
 
-# Overview
+
+### Overview
 스타벅스MD 물류회사 ERP System   
 2020.06.22 ~ 2020.07.17
 
-# Skills
+
+
+## Skills
 * ![Github Badge](https://img.shields.io/badge/-JAVA-red)
 * ![Github Badge](https://img.shields.io/badge/-JSP/Servlet-brightgreen)
 * ![Github Badge](https://img.shields.io/badge/-Javascript-yellow)
 * ![Github Badge](https://img.shields.io/badge/-Oracle-327da8)
 * ![Github Badge](https://shields.io/badge/-HTML/CSS-ff69b4)
 
-# Features
+
+
+## Features
 * 
