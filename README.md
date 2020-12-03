@@ -23,8 +23,7 @@ Team Project
 * 상품관리
 * 거래관리
 * 통계
-* 결제진행
-<br>
+* 결제진행   
 ### Feature
 * 캘린더 API
 * 날씨 API
