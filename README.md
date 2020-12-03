@@ -2,7 +2,7 @@
 Team Project
 
 # Overview
-스타벅스MD 물류회사 ERP System 구축<br/>
+스타벅스MD 물류회사 ERP System   
 2020.06.22 ~ 2020.07.17
 
 # Skills
