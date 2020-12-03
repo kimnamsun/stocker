@@ -1,3 +1,11 @@
+# Table of Contents
+1. [About Project](#STOCKer)
+2. [Overview](#Overview)
+3. [Skills](#Skills)
+4. [Features](#Features)
+
+
+
 # STOCKer
 Team Project
 
