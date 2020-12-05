@@ -8,7 +8,7 @@ Team Project
 ## Skills
 * ![Github Badge](https://img.shields.io/badge/-JAVA-red)
 * ![Github Badge](https://img.shields.io/badge/-JSP/Servlet-brightgreen)
-* ![Github Badge](https://img.shields.io/badge/-Javascript-yellow)
+* ![Github Badge](https://img.shields.io/badge/-Javascript/JQuery-yellow)
 * ![Github Badge](https://img.shields.io/badge/-Oracle-327da8)
 * ![Github Badge](https://shields.io/badge/-HTML/CSS-ff69b4)
 <br><br>
