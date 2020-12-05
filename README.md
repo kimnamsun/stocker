@@ -1,9 +1,9 @@
 ## STOCKer
-Team Project
+Team Project   
+2020.06.22 ~ 2020.07.17
 <br><br>
 ## Overview
 스타벅스MD 물류회사 ERP System   
-2020.06.22 ~ 2020.07.17
 <br><br>
 ## Skills
 * ![Github Badge](https://img.shields.io/badge/-JAVA-red)
