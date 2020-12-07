@@ -26,4 +26,4 @@ Team Project
 * 메일보내기
 <br><br>
 ## ERD
-![ERD]()
+![ERD](https://images.velog.io/images/nsunny0908/post/9769eea1-06a3-4039-8839-6a522a2f3be8/image.png)
