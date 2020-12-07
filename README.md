@@ -17,6 +17,7 @@ Team Project
 * 거래관리
 * 통계
 * 결제진행
+* 사내게시판
 <br><br>
 ## Feature
 * 캘린더 API
