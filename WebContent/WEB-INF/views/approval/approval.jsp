@@ -20,7 +20,6 @@
 	Date now = new Date();
 	String today = sdf.format(now); 
 	
-	
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
@@ -68,8 +67,6 @@
                   <i class="mdi mdi-script"></i>
                 </span> 진행결재 관리 </h3>
             </div>
-          
-          
           	<div class="order-main">
 				<div class="row" style="margin-left: 0; margin-top: 48px; padding-left: 20px">
 					<div style="display: inline-block;">
@@ -91,15 +88,9 @@
 					<% } %>
 					</div>
 				</div>
-				
-				
 				<br clear="both">
-				
 				<div class="col-lg-12 grid-margin stretch-card" style="margin-top: 26px">
 				  <div class="card">
-				  
-					  
-					  <!-- 진행결재함 테이블 -->
   					<div class="card-body"  id="waiting-approval" style="padding-top: 2rem;">
 					  <h2 class="card-title"><i class="fa fa-calendar" aria-hidden="true"></i>&emsp;<%= today %></h2> 
 					  <table class="table">
@@ -113,19 +104,13 @@
 						  </tr>
 						</thead>
 						<tbody>
-						<%-- 조회 테이블이 발주테이블일 경우 --%>
-						
 						<%
 							if(empLoggedIn.geteDept().equals("발주"))
 							{
 								if (oList == null || oList.isEmpty()) {
 						%>
-						<!-- <tr>
-							<th colspan="5">조회된 행이 없습니다.</th>
-						</tr>	 -->			
 						<%
 								} else {
-								
 									for(Order o : oList) {
 						%>
 						  <tr>
@@ -141,8 +126,6 @@
 								}
 							}
 						%>
-						<%-- 조회 유저가 재고담당일 경우 --%>
-						<%-- 경기광주담당일 경우 --%> <%-- 경기담당, 대구담당일 경우 리스트가 다르게 보이게 했지만 페이징이 꼬여서 보류 --%>
 						<%
 							if(empLoggedIn.geteDept().equals("경기물류") || empLoggedIn.geteDept().equals("대구물류"))
 							{
@@ -150,13 +133,8 @@
 						<%
 								if (oList == null || oList.isEmpty()) {
 									%>
-									<!-- <tr>
-										<th  colspan="5" style="text-align:center;">조회된 행이 없습니다.</th>
-									</tr>	 -->			
 									<%
 											} else {
-												
-											
 												for(Order o : oList) {
 												/* if(o.getcCode().equals("GG")) { */
 									%>
@@ -174,12 +152,8 @@
 										
 									%>
 						<%
-							
 								if (tList == null || tList.isEmpty()) {
 						%>
-						<!-- <tr>
-							<th  colspan="5" style="text-align:center;">조회된 행이 없습니다.</th>
-						</tr> -->				
 						<%
 								} else {
 									if(empLoggedIn.geteDept().equals("경기물류") || empLoggedIn.geteDept().equals("대구물류"))
@@ -199,8 +173,6 @@
 								}
 								}	
 						%>
-						
-						<%-- 대구담당일 경우 --%>
 						<%-- <%
 							if(empLoggedIn.geteDept().equals("대구물류"))
 							{
@@ -208,13 +180,8 @@
 						<%
 								if (oList == null || oList.isEmpty()) {
 									%>
-									<!-- <tr>
-										<th  colspan="5" style="text-align:center;">조회된 행이 없습니다.</th>
-									</tr>	 -->			
 									<%
 											} else {
-												
-											
 												for(Order o : oList) {
 												if(o.getcCode().equals("TK")) {
 									%>
@@ -229,17 +196,12 @@
 									<% 				}
 												} 
 											}
-										
 									%>
 						<%
 								if (tList == null || tList.isEmpty()) {
 						%>
-						<!-- <tr>
-							<th  colspan="5" style="text-align:center;">조회된 행이 없습니다.</th>
-						</tr> -->				
 						<%
 								} else {
-								
 									for(Transfer t : tList) {
 						%>
 						  <tr>
@@ -255,9 +217,6 @@
 								}
 							}
 						%> --%>
-						
-						<!-- 조회 테이블이 이송테이블일 경우 -->
-							
 						<%
 							if(empLoggedIn.geteDept().equals("이송"))
 							{
@@ -288,10 +247,6 @@
 						</tbody>
 					  </table>
 					  </div>
-					  
-					<!--  페이징 -->
-					
-					<!-- 발주리스트 페이징 -->
 					<% if (oList != null) { %>
 					<div class="pagingArea" align="center" style="padding-bottom: 2%;">
 						<%
@@ -304,7 +259,6 @@
 						<%
 							}
 						%>
-				
 						<%
 							for (int p = startPage; p <= endPage; p++) {
 						%>
@@ -328,7 +282,6 @@
 						<%
 							}
 						%>
-				
 						<%
 							if(maxPage != 0) {
 								if (currentPage != maxPage) {
@@ -344,10 +297,7 @@
 							}
 						%>
 					</div>
-					
 					<% } %>
-					
-					<!-- 이송리스트 페이징 -->
 					<% if(tList != null) { %>
 					<div class="pagingArea" align="center" style="padding-bottom: 2%;">
 						<%
@@ -360,7 +310,6 @@
 						<%
 							}
 						%>
-				
 						<%
 							for (int p = startPage; p <= endPage; p++) {
 						%>
@@ -384,7 +333,6 @@
 						<%
 							}
 						%>
-				
 						<%
 							if(maxPage != 0) {
 								if (currentPage != maxPage) {
@@ -400,26 +348,15 @@
 							}
 						%>
 					</div>
-					
 					<% } %>
-					
-					
-					
 				  </div>
 				</div>
-			
 			</div>
-          
           </div>
-          <!-- content-wrapper ends -->
     	   <%@ include file="../common/footer.jsp" %>
-          <!-- partial -->
         </div>
-        <!-- main-panel ends -->
       </div>
-      <!-- page-body-wrapper ends -->
     </div>
-    <!-- container-scroller -->
 	<%@ include file="../common/footerScript.jsp" %>
 <script>
 $('.btn').click(function() {
