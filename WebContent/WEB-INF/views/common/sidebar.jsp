@@ -6,7 +6,6 @@
 	Employee user = (Employee) session.getAttribute("empLoggedIn");
 %>
 <!DOCTYPE html>
-<!-- partial:partials/_sidebar.html -->
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
     <li class="nav-item">

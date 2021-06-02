@@ -13,67 +13,43 @@ import common.utill.Utils;
 import product.model.service.StockService;
 import product.model.vo.Stock;
 
-/**
- * Servlet implementation class StockFinderServlet
- */
 @WebServlet("/product/stockSearch")
 public class StockSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public StockSearchServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	public StockSearchServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		String[] searchArr = request.getParameterValues("search");
-		
+
 		int numPerPage = 10;
 		int cPage = 1;
-		
+
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
-		}catch(NumberFormatException e) {
+		} catch (NumberFormatException e) {
 		}
 
-		
-		//contents
-		List<Stock> list = new StockService().searchStock
-									(searchArr, cPage, numPerPage);
-//		System.out.println("list@servlet = " + list.toString());
-		
-		//pageBar
+		List<Stock> list = new StockService().searchStock(searchArr, cPage, numPerPage);
 		int totalContents = new StockService().selectTotalContents(searchArr);
 		String searchArrStr = "";
-//		System.out.println("totalContents = " + totalContents);
-		
-		
-		for(int i = 0; i < 4; i++)
+
+		for (int i = 0; i < 4; i++)
 			searchArrStr += "?search=" + searchArr[i];
-		
-		String url = request.getRequestURI()
-					+ searchArrStr
-					+ "&";
-//		System.out.println("totalContents@servlet = " + totalContents);
+
+		String url = request.getRequestURI() + searchArrStr + "&";
 		String pageBar = Utils.getPageBarHTML(cPage, numPerPage, totalContents, url);
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
-		request.getRequestDispatcher("/WEB-INF/views/product/stock.jsp")
-		.forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/product/stock.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

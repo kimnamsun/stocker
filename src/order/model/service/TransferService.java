@@ -15,8 +15,6 @@ public class TransferService {
 		Connection conn = getConnection();
 		List<Transfer> transferlist = transferDAO.selectTransferList(conn, cPage, numPerPage);
 		close(conn);
-		
-//		System.out.println("list@service="+list);
 		return transferlist;
 	}
 
@@ -26,7 +24,6 @@ public class TransferService {
 		close(conn);
 		return totalConetents;
 	}
-
 
 	public int selectTotalContents(String[] searchArr) {
 		Connection conn = getConnection();
@@ -38,18 +35,13 @@ public class TransferService {
 	public List<Transfer> searchTransfer(String[] searchArr, int cPage, int numPerPage) {
 		Connection conn = getConnection();
 		List<Transfer> tList = transferDAO.searchTransfer(conn, searchArr, cPage, numPerPage);
-//		System.out.println("tList@service=" + tList.toString());
 		return tList;
 	}
 
 	public Transfer selectOne(String tCode) {
 		Connection conn = getConnection();
 		Transfer transfer = transferDAO.transferSelectOne(conn, tCode);
-//		System.out.println("transfer@service = " + transfer);
 		return transfer;
 	}
-
-
-
 
 }

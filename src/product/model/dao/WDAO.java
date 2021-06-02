@@ -68,8 +68,6 @@ private Properties prop = new Properties();
 				
 				list.add(w);
 				
-//				System.out.println("w@dao = " + w);
-				
 			}
 						
 		} catch (SQLException e) {
@@ -78,8 +76,6 @@ private Properties prop = new Properties();
 			close(rset);
 			close(pstmt);
 		}
-		
-//		System.out.println("wList@dato = " + list);
 		
 		return list;
 	}
@@ -98,7 +94,6 @@ private Properties prop = new Properties();
 				listCount = rset.getInt(1);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -135,7 +130,6 @@ private Properties prop = new Properties();
 				listCount = rset.getInt(1);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -179,19 +173,15 @@ private Properties prop = new Properties();
 												rset.getDate("w_date"), 
 												rset.getString("c_code"));
 	
-	
 				wList.add(w);
-//				System.out.println(w);
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
-//		System.out.println(wList);
 		return wList;
 	}
 

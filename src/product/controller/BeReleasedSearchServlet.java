@@ -13,66 +13,46 @@ import common.utill.Utils;
 import product.model.service.BeReleasedService;
 import product.model.vo.BeReleased;
 
-/**
- * Servlet implementation class StockFinderServlet
- */
 @WebServlet("/beReleased/search")
 public class BeReleasedSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public BeReleasedSearchServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	public BeReleasedSearchServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		String[] searchArr = request.getParameterValues("search");
-		
+
 		int numPerPage = 5;
 		int cPage = 1;
-		
+
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
-		}catch(NumberFormatException e) {
+		} catch (NumberFormatException e) {
 		}
 
-		//contents
-		List<BeReleased> list = new BeReleasedService().searchBeReleased
-									(searchArr, cPage, numPerPage);
-		
-		//pageBar
+		List<BeReleased> list = new BeReleasedService().searchBeReleased(searchArr, cPage, numPerPage);
+
 		int totalContents = new BeReleasedService().selectTotalContents(searchArr);
 		String searchArrStr = "?";
-//		System.out.println("totalContents = " + totalContents);
-		
-		
-		for(int i = 0; i < 6; i++)
+
+		for (int i = 0; i < 6; i++)
 			searchArrStr += "&search=" + searchArr[i];
-		
-		String url = request.getRequestURI()
-					+ searchArrStr
-					+ "&";
-//		System.out.println("totalContents@servlet = " + totalContents);
+
+		String url = request.getRequestURI() + searchArrStr + "&";
 		String pageBar = Utils.getPageBarHTML(cPage, numPerPage, totalContents, url);
-		
+
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
-		
+
 		request.getRequestDispatcher("/WEB-INF/views/product/beReleased.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

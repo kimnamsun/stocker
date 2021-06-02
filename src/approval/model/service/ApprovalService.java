@@ -53,7 +53,6 @@ public class ApprovalService {
 	public List<Transfer> selectWaitingStockTransfer(PageInfo pi) {
 		Connection conn = getConnection();
 		List<Transfer> tList = approvalDAO.selectWaitingStockTansfer(conn, pi);
-//		System.out.println("tList@service=" + tList);
 		close(conn);
 		return tList;
 	}
@@ -61,7 +60,6 @@ public class ApprovalService {
 	public List<Transfer> selectCompleteTransfer(PageInfo pi) {
 		Connection conn = getConnection();
 		List<Transfer> tList = approvalDAO.selectCompleteTransfer(conn, pi);
-//		System.out.println("tList@service=" + tList);
 		close(conn);
 		return tList;
 	}

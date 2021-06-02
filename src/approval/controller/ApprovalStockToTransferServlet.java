@@ -14,27 +14,18 @@ import order.model.vo.Order;
 import order.model.vo.PageInfo;
 import order.model.vo.Transfer;
 
-/**
- * Servlet implementation class ApprovalStockToTransferServlet
- */
 @WebServlet("/approval/stt")
 public class ApprovalStockToTransferServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ApprovalStockToTransferServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ApprovalStockToTransferServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		List<Transfer> tList = null;
-		
+
 		int totalList = new ApprovalService().getListCount();
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		int pageLimit = 5;
@@ -42,29 +33,21 @@ public class ApprovalStockToTransferServlet extends HttpServlet {
 		int maxPage = (int) Math.ceil((double) totalList / listLimit);
 		int startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
 		int endPage = startPage + pageLimit - 1;
-		
-		if(endPage > maxPage)
+
+		if (endPage > maxPage)
 			endPage = maxPage;
 
 		PageInfo pi = new PageInfo(totalList, currentPage, startPage, endPage, maxPage, pageLimit, listLimit);
-		
-		
-		
-		tList = new ApprovalService().selectWaitingStockTransfer(pi); 
-		
-//		System.out.println("tlist@servlet = " + tList);
-		
-		
+
+		tList = new ApprovalService().selectWaitingStockTransfer(pi);
+
 		request.setAttribute("pi", pi);
 		request.setAttribute("tList", tList);
 		request.getRequestDispatcher("/WEB-INF/views/approval/approval.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

@@ -43,7 +43,6 @@
   <script>
 	$(function(){
 		var message = "<%=msg%>";
-		// var message = "회원가입 성공!!"; // "null"
 		if(message != "null"){
 			alert(message);
 			<% session.removeAttribute("msg"); %>
@@ -54,10 +53,8 @@
   <body>
     <div class="container-scroller">
 	  <%@ include file="../common/navbar.jsp" %>
-      <!-- partial -->
       <div class="container-fluid page-body-wrapper">
 		<%@ include file="../common/sidebar.jsp" %>
-        <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
               <i class="mdi mdi-close" id="bannerClose" style="display: none;"></i>
@@ -74,8 +71,6 @@
 					<% if(empLoggedIn.geteDept().equals("경기물류") || empLoggedIn.geteDept().equals("대구물류"))
 						{
 					%>
-						<%-- <button type="button" class="btn btn-info btn-fw" style="margin-right: 27px;" data-target="progress-approval"
-							    onclick="location.href='<%= contextPath %>/approval?currentPage=1'"> 진행결재함 </button> --%>
 						<button type="button" class="btn btn-primary btn-fw" style="margin-right: 27px;" data-target="progress-approval"
 							    onclick="location.href='<%= contextPath %>/approval?currentPage=1'"> 재고 - 발주 진행결재함 </button>
 						<button type="button" class="btn btn-primary btn-fw" style="margin-right: 27px;" data-target="progress-approval"
@@ -136,7 +131,6 @@
 									<%
 											} else {
 												for(Order o : oList) {
-												/* if(o.getcCode().equals("GG")) { */
 									%>
 									  <tr>
 											<td><label class="badge badge-warning"> 대기 </label></td>
@@ -173,50 +167,6 @@
 								}
 								}	
 						%>
-						<%-- <%
-							if(empLoggedIn.geteDept().equals("대구물류"))
-							{
-						%>
-						<%
-								if (oList == null || oList.isEmpty()) {
-									%>
-									<%
-											} else {
-												for(Order o : oList) {
-												if(o.getcCode().equals("TK")) {
-									%>
-									  <tr>
-											<td><label class="badge badge-warning"> 대기 </label></td>
-											<td> 발주요청 </td>
-											<td><a href="#" onclick="window.open('<%=contextPath%>/product/stockOrderToBR?oCode=<%=o.getoCode()%>',
-				            						'_blank', 'top=1,left=500,width=1000,height=700')"> <%= o.getoCode() %> </a></td>
-											<td> <%= o.getoTitle() %> </td>
-											<td> <%= sdf2.format(o.getoDate()) %> </td>
-									  </tr>
-									<% 				}
-												} 
-											}
-									%>
-						<%
-								if (tList == null || tList.isEmpty()) {
-						%>
-						<%
-								} else {
-									for(Transfer t : tList) {
-						%>
-						  <tr>
-								<td><label class="badge badge-warning"> 대기 </label></td>
-								<td> 이송요청 </td>
-								<td><a href="#" onclick="window.open('<%=contextPath%>/stock/stockDetailForm?tCode=<%=t.gettCode()%>',
-				            			'_blank', 'top=1,left=500,width=1000,height=700')"> <%= t.gettCode() %> </a></td>
-								<td> <%= t.gettTitle() %> </td>
-								<td> <%= sdf2.format(t.gettDate()) %> </td>
-						  </tr>
-						<% 
-									} 
-								}
-							}
-						%> --%>
 						<%
 							if(empLoggedIn.geteDept().equals("이송"))
 							{

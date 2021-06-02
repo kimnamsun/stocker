@@ -21,9 +21,6 @@ public class OrderService {
 		Connection conn = getConnection();
 		List<Order> orderList = orderDAO.selectAll(conn, pi);
 		close(conn);
-		
-//		System.out.println("orderList@service = " + orderList);
-		
 		return orderList;
 	}
 
@@ -31,9 +28,6 @@ public class OrderService {
 		Connection conn = getConnection();
 		List<Product> productList = orderDAO.selectAllProduct(conn);
 		close(conn);
-		
-//		System.out.println("productList@service = " + productList);
-		
 		return productList;
 	}
 
@@ -74,29 +68,29 @@ public class OrderService {
 
 	public int insertOrder(List<Order> orderList) {
 		Connection conn = getConnection();
-		
+
 		int result = 1;
-		
-		for(Order o : orderList) 
+
+		for (Order o : orderList)
 			result *= orderDAO.insertOrder(conn, o);
-		
-		if(result != 0) commit(conn);
-		else rollback(conn);
-		
+
+		if (result != 0)
+			commit(conn);
+		else
+			rollback(conn);
+
 		close(conn);
 		return result;
 	}
 
-	public Product selectOneProduct(String getpCode) 
-	{
+	public Product selectOneProduct(String getpCode) {
 		Connection conn = getConnection();
 		Product p = orderDAO.selectOneProduct(conn, getpCode);
 		close(conn);
 		return p;
 	}
 
-	public Shop selectOneShop(String getsCode) 
-	{
+	public Shop selectOneShop(String getsCode) {
 		Connection conn = getConnection();
 		Shop s = orderDAO.selectOneShop(conn, getsCode);
 		close(conn);

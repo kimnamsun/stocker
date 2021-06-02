@@ -10,18 +10,19 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/member/passwordFinder")
 public class PasswordFinderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public PasswordFinderServlet() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/member/passwordFinder.jsp")
-		.forward(request, response);
-	
+	public PasswordFinderServlet() {
+		super();
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.getRequestDispatcher("/WEB-INF/views/member/passwordFinder.jsp").forward(request, response);
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

@@ -44,7 +44,7 @@ public class LoginFilter implements Filter {
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp")
 			.forward(request, response);
 			
-			return; //이하 코드가 처리되지 않도록 함.
+			return;
 		}
 		
 		chain.doFilter(request, response);

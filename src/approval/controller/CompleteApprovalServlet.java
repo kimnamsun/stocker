@@ -16,28 +16,15 @@ import order.model.vo.Order;
 import order.model.vo.PageInfo;
 import order.model.vo.Transfer;
 
-/**
- * Servlet implementation class CompleteApprovalServlet
- */
 @WebServlet("/approval/complete")
 public class CompleteApprovalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public CompleteApprovalServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String flag = request.getParameter("flag");
-		
-		/* 로그인 정보 받아와서 부서마다 원하는 정보 조회해서 넘기기 */
 		
 		List<Order> list = null;
 		List<Transfer> tList = null;
@@ -55,22 +42,9 @@ public class CompleteApprovalServlet extends HttpServlet {
 
 		PageInfo pi = new PageInfo(totalList, currentPage, startPage, endPage, maxPage, pageLimit, listLimit);
 		
-//		System.out.println("pi@servlet = " + pi.toString());
-		
-		
-		// 발주 부서일 경우
 		list = new ApprovalService().selectCompleteOrder(pi);
-//		System.out.println("list@servlet = " + list);
 		
-		//재고 부서일 경우
-		
-		
-		
-		//이송 부서일 경우
 		tList = new ApprovalService().selectCompleteTransfer(pi);
-//		System.out.println("tList@servlet=" + tList);
-		
-		
 		
 		request.setAttribute("flag", flag);
 		request.setAttribute("pi", pi);
@@ -79,11 +53,7 @@ public class CompleteApprovalServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/views/approval/approval.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

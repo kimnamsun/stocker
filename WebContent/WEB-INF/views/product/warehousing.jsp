@@ -27,7 +27,6 @@
   </head>
   <style>
 	#stock-tr{
-		/* font-family: 고딕; */
 		font-weight: bold;
 	}
 	.popup_panel { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 100;}
@@ -38,10 +37,8 @@
   <body>
     <div class="container-scroller">
 	  <%@ include file="../common/navbar.jsp" %>
-      <!-- partial -->
       <div class="container-fluid page-body-wrapper">
 		<%@ include file="../common/sidebar.jsp" %>
-        <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
               <i class="mdi mdi-close" id="bannerClose" style="display: none;"></i>
@@ -51,10 +48,6 @@
                   <i class="mdi mdi-basket"></i>
                 </span> 입 고 </h3>
             </div>
-          
-          
-          
-          <%-- Contents --%>
           <div class="col-12">
                 <div class="card">
                   <div class="card-body">
@@ -106,15 +99,8 @@
                   </div>
                 </div>
               </div>
-              
-              
           <div >
-          		
-          	
-       
-          	
           <div >
-          	
           <div class="col-12 grid-margin" style="margin-top: 26px">
                 <div class="card">
                   <div class="card-body">
@@ -160,8 +146,6 @@
                         </tbody>
                       </table>
                     </div>
-                    
-                    <!--  페이징 -->
 					<div class="pagingArea" align="center">
 						<%
 							if (currentPage != 1) {
@@ -221,9 +205,6 @@
 							}
 						%>
 					</div>
-                    
-                    
-                    
                   </div>
                 </div>
               </div>
@@ -235,18 +216,13 @@
           
           
           </div>
-          <!-- 레이어 팝업 시작 -->
 			<div class="popup_panel">
 				<div class="popup_bg"></div>
 					<div class="popup_contents" style="float: left;">
-						<!-- images 폴더에 p_code와 같은 이름의 jpg파일 -->
 						<img id="p_image" src="" alt="" />
 					<div class="popup_contents2">
-						<!-- db product테이블 p_theme 컬럼 --> 
 						<span id="p_theme">p_theme</span>
-						<!-- db product테이블 p_category 컬럼 -->
 						<span id="p_category">p_category</span>
-						<!-- db product테이블 p_name 컬럼 -->
 						<span id="p_name">p_name</span>
 						<hr />
 						<span id="p_price" style="float:right">p_price</span>
@@ -256,71 +232,55 @@
 					</div>
 				</div>
 			</div>
-          <!-- content-wrapper ends -->
     	   <%@ include file="../common/footer.jsp" %>
-          <!-- partial -->
         </div>
-        <!-- main-panel ends -->
       </div>
-      <!-- page-body-wrapper ends -->
     </div>
-    <!-- container-scroller -->
 	<%@ include file="../common/footerScript.jsp" %>
 	<script>
 $(function () {
 		
-		// 레이어팝업 
 	    var $panel = $(".popup_panel");
 	    var $panelContents = $panel.find(".popup_contents");
 	    
-	    //상품상세팝업 클릭했을때
 	    $(".btn_popup_open").on("click", function(e) {
-	    	//상품코드 준비
 	    	var pCode = $(this).text();
-			var params = {pCode : pCode}; //서버로 보낼 파라미터
+			var params = {pCode : pCode};
 			
 			$.post('<%=contextPath%>/order/productDetail', $.param(params), function(responseJson){
-				//p_theme, p_category, p_name, p_price, p_qrImage
 
 				var obj = $.parseJSON(JSON.stringify(responseJson));
 
-				$("#p_image").attr("src", obj.pImage); //파일서블릿 경로(상품이미지 서버위치 가져옴)
+				$("#p_image").attr("src", obj.pImage);
 				$("#p_theme").text("[" + obj.pTheme + "]");
 				$("#p_category").text("[" + obj.pCategory + "]");
 				$("#p_name").text(obj.pName);
-				$("#p_price").text((obj.pPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //가격 콤마찍기 
-				$("#p_qr_image").attr("src", obj.pQrImage); //파일서블릿 경로(상품QR이미지 서버위치 가져옴)
-				
+				$("#p_price").text((obj.pPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
+				$("#p_qr_image").attr("src", obj.pQrImage);
 				
 			});
 			
-	        // 팝업 가운데 설정(가로)
 	        if ($panelContents.outerWidth() < $(document).width()) {
 	            $panelContents.css("margin-left", "-" + $panelContents.outerWidth() / 2 + "px");
 	        } else {
 	            $panelContents.css("left", "0px");
 	        }
 
-	        // 팝업 가운데 설정(세로)
 	        if ($panelContents.outerHeight() < $(document).height()) {
 	            $panelContents.css("margin-top", "-" + $panelContents.outerHeight() / 2 + "px");
 	        } else {
 	            $panelContents.css("top", "0px");
 	        }
-	        // 레이어 팝업 열기
 	        $panel.fadeIn();
 	        
 	    });
-	    // 팝업 닫기 이벤트 정의
 	    $("#btn_popup_close").on("click", popupClose);
 
-	    // 팝업 배경 클릭 이벤트 정의
 	    $panel.find(".popup_bg").on("click", popupClose);
 
 	
 		function popupClose(e) {
 		    $panel.fadeOut();
-		    // 이벤트 기본 동작 중단
 		    e.preventDefault();
 		}
 

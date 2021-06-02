@@ -53,7 +53,6 @@
 	.popup_panel div.popup_contents { position: absolute; top: 30%; left: 50%; width:600px; hight:800px; border:2px solid #b66dff; background-color:#fff; }
 	.popup_contents2 {display:inline; float: right; margin: 30px; margin-top: 63px; margin-right: 38px;}
 	.stock-tr {
-	/* font-family: 고딕; */
 	font-weight: bold;
 	}
 
@@ -70,10 +69,8 @@
 
 <div class="container-scroller">
 	<%@ include file="../common/navbar.jsp" %>
-      <!-- partial -->
       <div class="container-fluid page-body-wrapper">
 	<%@ include file="../common/sidebar.jsp" %>
-      <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
               <i class="mdi mdi-close" id="bannerClose" style="display: none;"></i>
@@ -105,9 +102,6 @@
  				<br>
  				
 <div class="row offset-md-1">
-<!--   <div class="col-md-12 grid-margin stretch-card"> -->
-<!--     <div class="card"> -->
-<!--       <div class="card-body">  -->
  	  <div class="col-md-5 stretch-card grid-margin">
      	 <div class="card bg-gradient-danger card-img-holder text-white">
      		 <div class="card-body">
@@ -132,9 +126,6 @@
 
 
 <div class="row offset-md-1">
-<!-- 		<div class="col-md-12 stretch-card grid-margin"> -->
-<!-- 		<div class="card offset-md-1"> -->
-<!-- 			<div class="card-body"> -->
 	<div class="col-md-5 stretch-card grid-margin">
 	  <div class="card bg-gradient-info card-img-holder text-white">
          <div class="card-body">
@@ -163,7 +154,6 @@
           <div class="card-body">
             <div class="clearfix">
               <h4 class="card-title float-left">카테고리 실시간 재고 현황</h4>
-<!--                       <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div> -->
             </div>
                 <canvas id="c_stock1" class="mt-2"></canvas>
             </div>
@@ -175,7 +165,6 @@
          <div class="card-body">
              <div class="clearfix">
                 <h4 class="card-title float-left">상품 테마 실시간 재고 현황</h4>
-<!--                       <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div> -->
              </div>
                 <canvas id="theme_stock1" class="mt-2"></canvas>
          </div>
@@ -202,7 +191,6 @@
                         </thead>
                         <tbody>
                             <% if(rtransfer1 == null || rtransfer1.isEmpty()){ %>	
-			<%--조회된 이송 상품이 없는 경우 --%>
 			<tr>
 				<th colspan="10"> 조회된 이송 상품이 없습니다.</th>
 			</tr>
@@ -212,7 +200,6 @@
 				
 				for(RankedTransfer t : rtransfer1){
 		%>
-			<%--조회된 상품이 있는 경우 --%>	
 				<tr>
 					<td><%=t.getRnum() %></td>
 					<td><a href="javascript:void(0)" class="btn_popup_open" style='color:#b66dff'> <%=t.getP_code() %></a></td>
@@ -306,7 +293,6 @@
                         </thead>
                         <tbody>
                           <% if(rshops == null || rshops.isEmpty()){ %>	
-			<%--조회된 매장이 없는 경우 --%>
 			<tr>
 				<th colspan="10"> 조회된 매장이 없습니다.</th>
 			</tr>
@@ -316,7 +302,6 @@
 				
 				for(RankedShop r : rshops){
 		%>
-			<%--조회된 매장이 있는 경우 --%>	
 				<tr>
 					
 					<td><%=r.getRank() %></td>
@@ -342,98 +327,75 @@
  	
  	
  	
-	<!-- 레이어 팝업 시작 -->
 	<div class="popup_panel">	
 	 <div class="popup_bg"></div>
 	  <div class="popup_contents" style="float: left;">
-	   <!-- images/...jpg로 저장 -->
 	   <img id="p_image" src="" alt="" />
 	   <div class="popup_contents2">
-	   <!-- product : p_theme --> 
 	   <span id="p_theme"> </span>
-	   <!-- product : p_category -->
 	   <span id="p_category"> </span>
-	   <!-- product : p_name-->
 	   <span id="p_name"> </span>
 	   <hr />
-	   <!-- product : p_price -->
 	   <span id="p_price" style="float:right"> </span>
-	   <!-- qrcode-->
 	   <div id="qrDiv" style="float: right; margin-top: 40px">
 	   <img id="p_qr_image" src="" alt="" style="width:130px; margin-right: -60px;"/>
 			</div>
    		</div>
 	  </div>
 	</div>
-	<!-- 레이어 팝업 끝 -->
 	
     <script> 
 $(function () {
 		
-		// 레이어팝업 
 	    var $panel = $(".popup_panel");
 	    var $panelContents = $panel.find(".popup_contents");
 	    
-	    //상품상세팝업 클릭했을때
 	    $(".btn_popup_open").on("click", function(e) {
-	    	//상품코드 준비
 	    	var pCode = $(this).text();
-			var params = {pCode : pCode}; //서버로 보낼 파라미터
+			var params = {pCode : pCode};
 			
 			$.post('<%=contextPath%>/order/productDetail', $.param(params), function(responseJson){
-				//p_theme, p_category, p_name, p_price, p_qrImage
 
 				var obj = $.parseJSON(JSON.stringify(responseJson));
 
-				$("#p_image").attr("src", obj.pImage); //파일서블릿 경로(상품이미지 서버위치 가져옴)
+				$("#p_image").attr("src", obj.pImage);
 				$("#p_theme").text("[" + obj.pTheme + "]");
 				$("#p_category").text("[" + obj.pCategory + "]");
 				$("#p_name").text(obj.pName);
-				$("#p_price").text((obj.pPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //가격 콤마찍기 
-				$("#p_qr_image").attr("src", obj.pQrImage); //파일서블릿 경로(상품QR이미지 서버위치 가져옴)
-				
+				$("#p_price").text((obj.pPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); 
+				$("#p_qr_image").attr("src", obj.pQrImage); 
 				
 			});
 			
-	        // 팝업 가운데 설정(가로)
 	        if ($panelContents.outerWidth() < $(document).width()) {
 	            $panelContents.css("margin-left", "-" + $panelContents.outerWidth() / 2 + "px");
 	        } else {
 	            $panelContents.css("left", "0px");
 	        }
 
-	        // 팝업 가운데 설정(세로)
 	        if ($panelContents.outerHeight() < $(document).height()) {
 	            $panelContents.css("margin-top", "-" + $panelContents.outerHeight() / 2 + "px");
 	        } else {
 	            $panelContents.css("top", "0px");
 	        }
-	        // 레이어 팝업 열기
 	        $panel.fadeIn();
 	        
 	    });
-	    // 팝업 닫기 이벤트 정의
 	    $("#btn_popup_close").on("click", popupClose);
 
-	    // 팝업 배경 클릭 이벤트 정의
 	    $panel.find(".popup_bg").on("click", popupClose);
 
 	
 		function popupClose(e) {
 		    $panel.fadeOut();
-		    // 이벤트 기본 동작 중단
 		    e.preventDefault();
 		}
 
 	})
-
-
 	
     let ylabels = ["<%=thisYear-3%>", "<%=thisYear-2%>", "<%=thisYear-1%>", "<%=thisYear%>"];
     let yrevenue1 = [0,0,0,0];
-    //경기도 광주 센터 연매출
     let yrevenue2 = [0,0,0,0];
-    //대구 센터 연매출
     let rchart = document.getElementById('rchart').getContext('2d');
     
     <%
@@ -465,12 +427,10 @@ $(function () {
         data: {labels: ylabels,
         	datasets:[{
         		label: "경기도 광주 센터",
-//         		backgroundColor: '#fe7096',
         		borderColor: '#58c5ed',
         		data: yrevenue1,
         	},{
         		label: "대구 센터",
-//         		backgroundColor: "#ffbb96",
         		borderColor: "#9a55ff",
         		data: yrevenue2,
         	}
@@ -479,18 +439,6 @@ $(function () {
         },
         options: {
             responsive: true,
-//         tooltips: {
-//           callbacks: {
-//                 label: function(tooltipItem, data) {
-//                     var value = data.datasets[0].data[tooltipItem.index];
-//                     if(parseInt(value) >= 1000){
-//                                return '￦'+value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-//                             } else {
-//                                return '￦'+value;
-//                             }
-//                 }
-//           } // end callbacks:
-//         }, //end tooltips                
             scales: {
                 yAxes: [{
                     ticks: {
@@ -580,7 +528,6 @@ $(function () {
 		%>dlabels.push('<%=datelist.get(i)%>'); 	
    		<%}
     
-  //entrySet().iterator()
   	Iterator<Entry<String, Integer>> dreventries1 = dailyreven1.entrySet().iterator();
   	while(dreventries1.hasNext()){
   	    Map.Entry<String, Integer> entry = dreventries1.next();
@@ -596,8 +543,6 @@ $(function () {
   	   		}
   			}%>
   	
-	  	
-  //entrySet().iterator()
   <%Iterator<Entry<String, Integer>> dreventries2 = dailyreven2.entrySet().iterator();
   	while(dreventries2.hasNext()){
   	    Map.Entry<String, Integer> entry = dreventries2.next();
@@ -625,7 +570,7 @@ $(function () {
     let labels1 = [];
     let data1 = [];
     
-  	<%//entrySet().iterator()
+  	<%
   	Iterator<Entry<String, Integer>> cEntries = scategory.entrySet().iterator();
   	while(cEntries.hasNext()){
   	    Map.Entry<String, Integer> entry = cEntries.next();%>
@@ -640,7 +585,7 @@ $(function () {
     let labels2 = [];
     let data2 = [];
     
-    <%//entrySet().iterator()
+    <%
   	Iterator<Entry<String, Integer>> tEntries = stheme.entrySet().iterator();
   	while(tEntries.hasNext()){
   	    Map.Entry<String, Integer> entry = tEntries.next();%>
@@ -702,7 +647,7 @@ $(function () {
     let odata2 = [0,0,0,0,0,0,0,0,0,0,0,0];
     
     
-    <%//entrySet().iterator()
+    <%
   	Iterator<Entry<Integer, Integer>> inEntries1 = ainbound1.entrySet().iterator();
   	while(inEntries1.hasNext()){
   	    Map.Entry<Integer, Integer> entry = inEntries1.next();
@@ -714,7 +659,7 @@ $(function () {
   	    }
   	}
     %>
-    <%//entrySet().iterator()
+    <%
   	Iterator<Entry<Integer, Integer>> inEntries2 = ainbound2.entrySet().iterator();
   	while(inEntries2.hasNext()){
   	    Map.Entry<Integer, Integer> entry = inEntries2.next();
@@ -754,7 +699,7 @@ $(function () {
          }
      });
     
-    <%//entrySet().iterator()
+    <%
   	Iterator<Entry<Integer, Integer>> outEntries1 = aoutbound1.entrySet().iterator();
   	while(outEntries1.hasNext()){
   	    Map.Entry<Integer, Integer> entry = outEntries1.next();
@@ -766,7 +711,7 @@ $(function () {
   	    }
   	}
     %>
-    <%//entrySet().iterator()
+    <%
   	Iterator<Entry<Integer, Integer>> outEntries2 = aoutbound2.entrySet().iterator();
   	while(outEntries2.hasNext()){
   	    Map.Entry<Integer, Integer> entry = outEntries2.next();
@@ -838,21 +783,10 @@ $(function () {
      });  
     
     </script>
-
-     
-          
-          <%-- Contents --%>
-                   
-          
-          <!-- content-wrapper ends -->
     	   <%@ include file="../common/footer.jsp" %>
-          <!-- partial -->
         </div>
-        <!-- main-panel ends -->
       </div>
-      <!-- page-body-wrapper ends -->
     </div>
-    <!-- container-scroller -->
 	<%@ include file="../common/footerScript.jsp" %>
   </body>
 </html>

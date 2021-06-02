@@ -13,58 +13,39 @@ import common.utill.Utils;
 import product.model.service.BeReleasedService;
 import product.model.vo.BeReleased;
 
-/**
- * Servlet implementation class BeReleasedServlet
- */
 @WebServlet("/product/beReleased")
 public class BeReleasedServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
 	private BeReleasedService bereleasedService = new BeReleasedService();
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public BeReleasedServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public BeReleasedServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		int numPerPage = 5;
 		int cPage = 1;
-		
-		
+
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
-			
-		}catch(NumberFormatException e) {
-			
+
+		} catch (NumberFormatException e) {
+
 		}
-		// 출고 테이블 불러오기
 		List<BeReleased> list = bereleasedService.selectAll(cPage, numPerPage);
-		
-//		System.out.println("servlet"+list);
-		
-		//pagebar		
+
 		int totalContents = bereleasedService.selectBereleasedCount();
 		String url = request.getRequestURI() + "?";
 		String pageBar = Utils.getPageBarHTML(cPage, numPerPage, totalContents, url);
-		
-		
+
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
 		request.getRequestDispatcher("/WEB-INF/views/product/beReleased.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

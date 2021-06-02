@@ -14,8 +14,6 @@
 	String cName = order != null ? ((order.getcCode()).equals("GG") ? "경기센터" : "대구센터") : "";
 	Employee writer = (Employee) request.getAttribute("emp"); 
 	
-	// System.out.println("order = " + order);
-	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 	Date now = new Date();
 	String today = sdf.format(now);
@@ -50,22 +48,10 @@ input {
   		session.removeAttribute("msg");
   	}
   %>
-  
-
-<!--     <div class="container-scroller"> -->
-      <!-- partial -->
       <div class="container-fluid page-body-wrapper">
-        <!-- partial -->
         <div class="main-panel" style="width: 100%;">
           <div class="content-wrapper">
               <i class="mdi mdi-close" id="bannerClose" style="display: none;"></i>
-              
-              
-              
-              
-          <%-- Contents --%>
-          
-          
           <div style="padding-right: 20px;">
 	          <div style="float:left; display: inline-block; margin-top: 48px; margin-left: 26px;"><h1 class="display-1 kor"> 발주서 </h1></div>
 			  <div class="card" style="display: inline-block; margin-top: 26px; width:148px; float:right" >
@@ -77,7 +63,6 @@ input {
 				</div>
 			  </div>
           </div>
-		  
 		 
 		 <form class="forms-sample" id="orderForm" action="<%= contextPath %>/order/submitOrder" method="post">
 		  
@@ -214,28 +199,17 @@ input {
 				<i class="mdi mdi-file-check btn-icon-prepend" ></i> 결재요청 </button>		
 			</div>
 			</form>
-          <!-- content-wrapper ends -->
-          <!-- partial -->
         </div>
-        <!-- main-panel ends -->
       </div>
-      <!-- page-body-wrapper ends -->
     </div>
     
-    
-    
-    
-    
-    
-    <!-- container-scroller -->
     <%@ include file="../common/footerScript.jsp" %>
     <script>
-    /* 선택항목 삭제 */
     function deleteCheckedItem() {
     	let $selectedItem = $(".selectOne:checked").not($("selectAll"));
     	$selectedItem.parent().parent().remove(); 
     }
-    /* 전체선택 */
+    
     function selectAllCheckBox() {
     	if($("#selectAll").prop("checked")) {
     		$(".selectOne").prop("checked", true);
@@ -245,7 +219,6 @@ input {
     	}
     }
     
-    /* 매장 선택시 자동으로 센터 지정되도록 하는 함수 */
     function selectCenter() {
     	let $shop = $("#shop").val();
     	let shopNum =parseInt($shop.substring(1, 4));
@@ -255,7 +228,7 @@ input {
     	else
     		$("#center").val("경기센터");
     }
-    /* 수량체크 */
+
     function numCheck(e){
     	if(e.value == 0) {
     		if(document.activeElement != e) {
@@ -269,7 +242,6 @@ input {
     	}
     }
     
-    /* 발주서 작성 완료 */
     function validate() {
     	let $title = $("input[name='title']");
     	let $amount = $("input[name='amount']");
@@ -303,7 +275,6 @@ input {
     	return true;
     };
     
-    /* 상품코드로 검색해서 테이블에 추가하기 */
     $("#addProductBtn").click(function(){
     	let inp = $("#addProductInput").val();
     	if(inp == "") {
@@ -324,7 +295,6 @@ input {
 					alert("조회된 상품이 없습니다.");
 				else {
 					for(let i = 0; i < pList.length; i++) {
-						/* 중복제거 */
 						let arr = [];					
 						
 						$.each($("input[name='pCode']"),function(k,v) {
@@ -335,7 +305,6 @@ input {
 							
 						 }
 				         else {
-					         /* 중복되지 않는 행 추가 */
 							result += "<tr>" +
 								      "<td style='padding: 0 3%; width: 11%;'><input type='checkbox' class='selectOne'></td>" +
 								      "<td style='padding: 0;'><input type='text' name='pCode' style='padding: 0; width: 100%; display: inline-block; border: none;' value='" + pList[i].pCode + "' readonly></td>" +

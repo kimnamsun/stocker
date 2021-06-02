@@ -15,59 +15,40 @@ import order.model.vo.Order;
 import product.model.vo.Product;
 import sales.model.vo.Shop;
 
-/**
- * Servlet implementation class OrderDetailFormServlet
- */
 @WebServlet("/order/orderDetailForm")
 public class OrderDetailFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public OrderDetailFormServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public OrderDetailFormServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String oCode = request.getParameter("oCode");
-		
-//		System.out.println("ocode@servlet = " + oCode);
-		
 		Order order = new OrderService().selectOneOrder(oCode);
 		Employee emp = new EmpService().selctOne(order.getWriter());
-		
-//		System.out.println("order@servlet = " + order);
-		
 		Product product = new OrderService().selectOneProduct(order.getpCode());
 		Shop shop = new OrderService().selectOneShop(order.getsCode());
-		
-		HttpSession session = request.getSession(); 
-		Employee memberLoggedIn  = ((Employee)session.getAttribute("empLoggedIn"));
-		
-		if((memberLoggedIn==null)
-		||!("관리자".equals(memberLoggedIn.geteDept()) ||"발주".equals(memberLoggedIn.geteDept()))){
-			
+
+		HttpSession session = request.getSession();
+		Employee memberLoggedIn = ((Employee) session.getAttribute("empLoggedIn"));
+
+		if ((memberLoggedIn == null)
+				|| !("관리자".equals(memberLoggedIn.geteDept()) || "발주".equals(memberLoggedIn.geteDept()))) {
 			session.setAttribute("msg", "발주 담당자만 접근 가능합니다.");
-			
-			}
-		
+
+		}
+
 		request.setAttribute("emp", emp);
 		request.setAttribute("order", order);
 		request.setAttribute("product", product);
 		request.setAttribute("shop", shop);
-		request.getRequestDispatcher("/WEB-INF/views/order/orderForm.jsp").forward(request, response);	
+		request.getRequestDispatcher("/WEB-INF/views/order/orderForm.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

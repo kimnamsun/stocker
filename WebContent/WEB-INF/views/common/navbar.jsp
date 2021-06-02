@@ -6,7 +6,6 @@
 %>
 
 <!DOCTYPE html>
-<!-- partial:partials/_navbar.html -->
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
   <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
     <a class="navbar-brand brand-logo" href="<%= request.getContextPath() %>/index.jsp"><img src="<%=  request.getContextPath() %>/resources/bootstrap/images/logo.png" alt="logo" /></a>

@@ -13,14 +13,12 @@ import order.model.vo.Order;
 import product.model.vo.Product;
 
 public class ProductDAO {
-	
+
 	private Properties prop = new Properties();
-	
-	public ProductDAO () {
+
+	public ProductDAO() {
 		try {
-			String fileName = ProductDAO.class
-					.getResource("/sql/product/product-query.properties")
-					.getPath();
+			String fileName = ProductDAO.class.getResource("/sql/product/product-query.properties").getPath();
 			prop.load(new FileReader(fileName));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -39,25 +37,23 @@ public class ProductDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, pCode);
 			rset = pstmt.executeQuery();
-			while(rset.next()) {
+			while (rset.next()) {
 				product = new Product();
-				
+
 				product.setpCode(rset.getString("P_CODE"));
 				product.setpTheme(rset.getString("P_THEME"));
 				product.setpCategory(rset.getString("P_CATEGORY"));
 				product.setpName(rset.getString("P_NAME"));
 				product.setpColor(rset.getString("P_COLOR"));
 				product.setpPrice(rset.getString("P_PRICE"));
-				
+
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		
-//		System.out.println("product@dao = " + product);
 		return product;
 	}
 

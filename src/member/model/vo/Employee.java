@@ -2,16 +2,16 @@ package member.model.vo;
 
 import java.io.Serializable;
 
-public class Employee implements Serializable{
+public class Employee implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	private int eCode; //사번
-	private String eName; //사원명
-	private String ePassword; //비밀번호
-	private String eDept; //부서
-	private String ePhone; //전화번호
-	private String eEmail; //이메일
-	
+
+	private int eCode;
+	private String eName;
+	private String ePassword;
+	private String eDept;
+	private String ePhone;
+	private String eEmail;
+
 	public Employee() {
 		super();
 	}

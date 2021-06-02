@@ -1,25 +1,24 @@
 package order.model.vo;
+
 import java.io.Serializable;
 import java.sql.Date;
 
-public class Transfer implements Serializable{
+public class Transfer implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	private String tCode; //이송코드
-	private Date tDate; //이송일
-	private int tAmount; //이송량
-	private String tStatus; // 이송여부
-	private String departureCode; //출발지코드
-	private String destinationCode; //도착지코드
-	private String pCode; //상품코드
-	private String tTitle; //이송요청품의서 제목
-	private String tWriter; //이송요청서 작성자(재고담당)
-	
+
+	private String tCode;
+	private Date tDate;
+	private int tAmount;
+	private String tStatus;
+	private String departureCode;
+	private String destinationCode;
+	private String pCode;
+	private String tTitle;
+	private String tWriter;
+
 	public Transfer() {
 		super();
 	}
-	
-	
 
 	public Transfer(String tCode, Date tDate, int tAmount, String tStatus, String departureCode, String destinationCode,
 			String pCode, String tTitle, String tWriter) {
@@ -34,9 +33,6 @@ public class Transfer implements Serializable{
 		this.tTitle = tTitle;
 		this.tWriter = tWriter;
 	}
-
-
-
 
 	public String gettCode() {
 		return tCode;
@@ -113,12 +109,12 @@ public class Transfer implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Transfer [tCode=" + tCode + ", tDate=" + tDate + ", tAmount=" + tAmount + ", tStatus=" + tStatus
 				+ ", departureCode=" + departureCode + ", destinationCode=" + destinationCode + ", pCode=" + pCode
 				+ ", tTitle=" + tTitle + ", tWriter=" + tWriter + "]";
 	}
-	
+
 }

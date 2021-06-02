@@ -32,14 +32,12 @@
 .popup_panel div.popup_contents { position: absolute; top: 30%; left: 50%; width:600px; hight:800px; border:2px solid #b66dff; background-color:#fff; }
 .popup_contents2 {display:inline; float: right; margin: 30px; margin-top: 63px; margin-right: 38px;}
 .stock-tr {
-	/* font-family: 고딕; */
 	font-weight: bold;
 }
 </style>
 <script>
 	$(function(){
 		var message = "<%=msg%>";
-		// var message = "회원가입 성공!!"; // "null"
 		if(message != "null"){
 			alert(message);
 			<% session.removeAttribute("msg"); %>
@@ -53,10 +51,8 @@
 
 	<div class="container-scroller">
 		<%@ include file="../common/navbar.jsp"%>
-		<!-- partial -->
 		<div class="container-fluid page-body-wrapper">
 			<%@ include file="../common/sidebar.jsp"%>
-			<!-- partial -->
 			<div class="main-panel">
 				<div class="content-wrapper">
 					<i class="mdi mdi-close" id="bannerClose" style="display: none;"></i>
@@ -70,22 +66,11 @@
 								</span> 발 주
 							</h3>
 						</div>
-
-
-						<%-- Contents --%>
-
-
-
 						<div
 							style="display: inline-block; width: 50%; text-align: right; padding-right: 40px;">
-							<!-- <button type="button" class="btn btn-inverse-info btn-rounded btn-icon" style="margin-right: 25px;"
-	                		data-toggle="tooltip" data-placement="top" title="납품계약서 다운로드">
-					  <i class="mdi mdi-file-word"></i>
-					</button> -->
 							<button type="button" 
 								class="btn btn-inverse-success btn-rounded btn-icon"
 								data-toggle="tooltip" data-placement="top" title="발주 엑셀폼 다운로드">
-								
 								<a download="order.xlsx" href="<%= contextPath %>/resources/order.xlsx"><i class="mdi mdi-file-excel"></i></a>
 							</button>
 							<div class="btn-group" style="float: right !important;">
@@ -209,7 +194,6 @@
 					<div class="col-12 grid-margin" style="margin-top: 26px">
 						<div class="card">
 							<div class="card-body">
-								<!-- <h4 class="card-title">발주 리스트</h4> -->
 								<div class="table-responsive">
 									<table class="table">
 										<thead>
@@ -268,9 +252,6 @@
 										</tbody>
 									</table>
 								</div>
-
-
-								<!--  페이징 -->
 								<div class="pagingArea" align="center">
 									<%
 										if (currentPage != 1) {
@@ -335,27 +316,18 @@
 						</div>
 					</div>
 				</div>
-				<!-- content-wrapper ends -->
 				<%@ include file="../common/footer.jsp"%>
-				<!-- partial -->
 			</div>
-			<!-- main-panel ends -->
 		</div>
-		<!-- page-body-wrapper ends -->
 	</div>
 	
-	<!-- 레이어 팝업 시작 -->
 	<div class="popup_panel">
 		<div class="popup_bg"></div>
 			<div class="popup_contents" style="float: left;">
-				<!-- images 폴더에 p_code와 같은 이름의 jpg파일 -->
 				<img id="p_image" src="" alt="" />
 			<div class="popup_contents2">
-				<!-- db product테이블 p_theme 컬럼 --> 
 				<span id="p_theme">p_theme</span>
-				<!-- db product테이블 p_category 컬럼 -->
 				<span id="p_category">p_category</span>
-				<!-- db product테이블 p_name 컬럼 -->
 				<span id="p_name">p_name</span>
 				<hr />
 				<span id="p_price" style="float:right">p_price</span>
@@ -366,18 +338,15 @@
 		</div>
 	</div>
 	
-	<!-- 파일 업로드 모달 -->
 	<div class="modal" id="myModal">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	
-	      <!-- Modal Header -->
 	      <div class="modal-header">
 	        <h4 class="modal-title">발주서를 업로드 하세요.</h4>
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
 	      </div>
 	
-	      <!-- Modal body -->
 	      <div class="modal-body">
 	     	 <form action="<%= contextPath %>/order/upload?ecode=<%= empLoggedIn.geteCode() %>" name="upload" method="POST" enctype="multipart/form-data">
 				<td><input type="file" name="filename" size="20" align="absmiddle" />    </td>
@@ -388,8 +357,6 @@
 	  </div>
 	</div>
 	
-	
-	<!-- container-scroller -->
 	<%@ include file="../common/footerScript.jsp"%>
 	<script>
 	function checkForm() {  
@@ -420,67 +387,49 @@
 				return false;    
 	}  
 
-
 	$(function () {
-		
-		// 레이어팝업 
 	    var $panel = $(".popup_panel");
 	    var $panelContents = $panel.find(".popup_contents");
 	    
-	    //상품상세팝업 클릭했을때
 	    $(".btn_popup_open").on("click", function(e) {
-	    	//상품코드 준비
 	    	var pCode = $(this).text();
-			var params = {pCode : pCode}; //서버로 보낼 파라미터
+				var params = {pCode : pCode};
 			
 			$.post('<%=contextPath%>/order/productDetail', $.param(params), function(responseJson){
-				//p_theme, p_category, p_name, p_price, p_qrImage
-
 				var obj = $.parseJSON(JSON.stringify(responseJson));
 
-				$("#p_image").attr("src", obj.pImage); //파일서블릿 경로(상품이미지 서버위치 가져옴)
+				$("#p_image").attr("src", obj.pImage);
 				$("#p_theme").text("[" + obj.pTheme + "]");
 				$("#p_category").html("[" + obj.pCategory + "]" + "<br>");
 				$("#p_name").text(obj.pName);
-				$("#p_price").text((obj.pPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //가격 콤마찍기 
-				$("#p_qr_image").attr("src", obj.pQrImage); //파일서블릿 경로(상품QR이미지 서버위치 가져옴)
-				
-				
+				$("#p_price").text((obj.pPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+				$("#p_qr_image").attr("src", obj.pQrImage); 
 			});
 			
-	        // 팝업 가운데 설정(가로)
 	        if ($panelContents.outerWidth() < $(document).width()) {
 	            $panelContents.css("margin-left", "-" + $panelContents.outerWidth() / 2 + "px");
 	        } else {
 	            $panelContents.css("left", "0px");
 	        }
 
-	        // 팝업 가운데 설정(세로)
 	        if ($panelContents.outerHeight() < $(document).height()) {
 	            $panelContents.css("margin-top", "-" + $panelContents.outerHeight() / 2 + "px");
 	        } else {
 	            $panelContents.css("top", "0px");
 	        }
-	        // 레이어 팝업 열기
 	        $panel.fadeIn();
 	        
 	    });
-	    // 팝업 닫기 이벤트 정의
+
 	    $("#btn_popup_close").on("click", popupClose);
-
-	    // 팝업 배경 클릭 이벤트 정의
 	    $panel.find(".popup_bg").on("click", popupClose);
-
 	
 		function popupClose(e) {
 		    $panel.fadeOut();
-		    // 이벤트 기본 동작 중단
 		    e.preventDefault();
 		}
 
 	})
-	
 	</script>
-
 </body>
 </html>

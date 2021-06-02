@@ -13,12 +13,12 @@ import product.model.vo.Warehousing;
 
 public class WService {
 	private WDAO wDAO = new WDAO();
-	
+
 	public List<Warehousing> selectAll(PageInfo pi) {
 		Connection conn = getConnection();
 		List<Warehousing> list = wDAO.selectAll(conn, pi);
 		close(conn);
-				
+
 		return list;
 	}
 

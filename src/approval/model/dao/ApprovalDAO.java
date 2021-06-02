@@ -65,13 +65,11 @@ public class ApprovalDAO {
 									rset.getString("o_title"),
 									rset.getString("o_comment"));
 				
-//				System.out.println("order@dao = " + o);
 				
 				list.add(o);
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -95,7 +93,6 @@ public class ApprovalDAO {
 				listCount = rset.getInt(1);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -119,7 +116,6 @@ public class ApprovalDAO {
 				listCount = rset.getInt(1);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -159,13 +155,10 @@ public class ApprovalDAO {
 									rset.getString("o_title"),
 									rset.getString("o_comment"));
 				
-//				System.out.println("order@dao = " + o);
-				
 				list.add(o);
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -206,13 +199,10 @@ public class ApprovalDAO {
 									rset.getString("o_title"),
 									rset.getString("o_comment"));
 				
-//				System.out.println("order@dao = " + o);
-				
 				list.add(o);
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -253,17 +243,7 @@ public class ApprovalDAO {
 									rset.getString("t_title"),
 									rset.getString("t_writer"));
 				
-//				System.out.println("stockorder@dao = " + s);
 				tlist.add(s);
-				
-//				private String tCode; //이송코드
-//				private Date tDate; //이송일
-//				private int tAmount; //이송량
-//				private String tStatus; // 이송여부
-//				private String departureCode; //출발지코드
-//				private String destinationCode; //도착지코드
-//				private String pCode; //상품코드
-//				private String tTitle; //이송요청품의서 제목
 			}
 			
 		} catch (SQLException e) {
@@ -304,11 +284,8 @@ public class ApprovalDAO {
 						rset.getString("t_title"),
 						rset.getString("t_writer"));
 				
-//				System.out.println("transfer@dao = " + t);
-				
 				tList.add(t);
 				
-//				System.out.println("tList@dao=" + tList);
 			}
 			
 		} catch (SQLException e) {

@@ -12,14 +12,11 @@ import product.model.vo.BeReleased;
 
 public class BeReleasedService {
 	private BeReleasedDAO bereleasedDAO = new BeReleasedDAO();
-	
+
 	public List<BeReleased> selectAll(int cPage, int numPerPage) {
 		Connection conn = getConnection();
 		List<BeReleased> list = bereleasedDAO.selectAll(conn, cPage, numPerPage);
 		close(conn);
-		
-//		System.out.println("bereleased service@service = " + list);
-		
 		return list;
 	}
 
@@ -33,7 +30,6 @@ public class BeReleasedService {
 	public List<BeReleased> searchBeReleased(String[] searchArr, int cPage, int numPerPage) {
 		Connection conn = getConnection();
 		List<BeReleased> searchbrlist = bereleasedDAO.searchBeReleased(conn, searchArr, cPage, numPerPage);
-//		System.out.println("tList@service=" + tList.toString());
 		return searchbrlist;
 	}
 
@@ -43,5 +39,4 @@ public class BeReleasedService {
 		close(conn);
 		return totalContents;
 	}
-
 }

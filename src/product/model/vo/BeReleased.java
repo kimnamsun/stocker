@@ -3,7 +3,7 @@ package product.model.vo;
 import java.io.Serializable;
 import java.sql.Date;
 
-public class BeReleased implements Serializable{
+public class BeReleased implements Serializable {
 	private String rCode; // 출고코드
 	private String oCode; // 발주코드
 	private String tCode; // 이송코드
@@ -11,10 +11,9 @@ public class BeReleased implements Serializable{
 	private int rAmount; // 출고수량
 	private String rReason; // 출고사유
 	private Date rDate; // 출고일
-	
+
 	public BeReleased() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public BeReleased(String rCode, String oCode, String tCode, String pCode, int rAmount, String rReason, Date rDate) {
@@ -89,7 +88,5 @@ public class BeReleased implements Serializable{
 		return "BeReleased [rCode=" + rCode + ", oCode=" + oCode + ", tCode=" + tCode + ", pCode=" + pCode
 				+ ", rAmount=" + rAmount + ", rReason=" + rReason + ", rDate=" + rDate + "]\n";
 	}
-	
-	
 
 }

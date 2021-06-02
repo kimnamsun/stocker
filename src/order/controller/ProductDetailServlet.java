@@ -30,51 +30,38 @@ import product.model.vo.Product;
 
 public class ProductDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+
 	private ProductService productService = new ProductService();
-	
-    public ProductDetailServlet() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				
-		String pCode  = request.getParameter("pCode").trim();
-		
-//		System.out.println("pCode="+pCode);
-		
-		//상품DB 가져오기
+	public ProductDetailServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String pCode = request.getParameter("pCode").trim();
 		Product product = productService.selectOne(pCode);
+		String qrValue = ProjectConfig.PRODUCT_QR_PREFIX_URL + pCode;
+		String qrImageUrl = ProjectConfig.PRODUCT_UPLOAD_LOCATION + "\\" + pCode + "_QR.png";
 
-		String qrValue = ProjectConfig.PRODUCT_QR_PREFIX_URL+pCode;
-		String qrImageUrl = ProjectConfig.PRODUCT_UPLOAD_LOCATION+"\\"+pCode+"_QR.png";
-
-//		System.out.println("qrImageUrl="+qrImageUrl);
-		
 		try {
 			Utils.generateQRCodeImage(qrValue, 150, 150, qrImageUrl);
 		} catch (WriterException | IOException e) {
 			e.printStackTrace();
-		} 
-		
-		//상품이미지 로딩
-		//product.setpImage(request.getContextPath()+"/resources/images/"+pCode+".jpg");
-		product.setpImage(request.getContextPath()+"/ProductFile/"+pCode+".jpg");
-		//QR이미지 로딩
-		//product.setpQrImage(request.getContextPath()+"/resources/images/"+pCode+"_QR.png");
-		product.setpQrImage(request.getContextPath()+"/ProductFile/"+pCode+"_QR.png");
+		}
 
-//		System.out.println("product="+product);
-		
-		//Json처리 
+		product.setpImage(request.getContextPath() + "/ProductFile/" + pCode + ".jpg");
+		product.setpQrImage(request.getContextPath() + "/ProductFile/" + pCode + "_QR.png");
+
 		String json = new Gson().toJson(product);
-//		System.out.println("json="+json);
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(json);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 }

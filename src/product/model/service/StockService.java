@@ -22,8 +22,6 @@ public class StockService {
 		Connection conn = getConnection();
 		List<Stock> list = stockDAO.selectStockList(conn, cPage, numPerPage);
 		close(conn);
-		
-//		System.out.println("list@service="+list);
 		return list;
 	}
 
@@ -34,12 +32,10 @@ public class StockService {
 		return totalConetents;
 	}
 
-
 	public List<Stock> searchStock(String[] searchArr, int cPage, int numPerPage) {
 		Connection conn = getConnection();
 		List<Stock> sList = stockDAO.searchStock(conn, searchArr, cPage, numPerPage);
 		close(conn);
-//		System.out.println("sList@service=" + sList.toString());
 		return sList;
 	}
 
@@ -52,16 +48,14 @@ public class StockService {
 
 	public int insertStockToTransfer(StockToTransfer reqTransfer) {
 		Connection conn = getConnection();
-		
+
 		int result = StockDAO.insertTransfer(conn, reqTransfer);
-		
-		if(result > 0) 
+
+		if (result > 0)
 			commit(conn);
-		else 
+		else
 			rollback(conn);
-		
-//		System.out.println("result@service=" + result);
-//		System.out.println("reqTransfer@service=" + reqTransfer);
+
 		close(conn);
 		return result;
 	}
@@ -75,32 +69,28 @@ public class StockService {
 
 	public int updateTransfer(Transfer sttT) {
 		Connection conn = getConnection();
-		
+
 		int result = StockDAO.updateTransfer(conn, sttT);
-		if(result > 0) 
+		if (result > 0)
 			commit(conn);
-		else 
+		else
 			rollback(conn);
-//		System.out.println("result@service=" + result);
 		close(conn);
 		return result;
 	}
 
 	public int insertStockToBR(BeReleased BR) {
 		Connection conn = getConnection();
-		
+
 		int result = StockDAO.insertStockToBR(conn, BR);
-		
-		if(result > 0) 
+
+		if (result > 0)
 			commit(conn);
-		else 
+		else
 			rollback(conn);
-		
+
 		close(conn);
-		
+
 		return result;
 	}
-	
-	
-	
 }

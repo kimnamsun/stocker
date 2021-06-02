@@ -2,7 +2,7 @@ package order.model.vo;
 
 import java.io.Serializable;
 
-public class PageInfo implements Serializable{
+public class PageInfo implements Serializable {
 
 	private int totalList;
 	private int currentPage;
@@ -11,10 +11,9 @@ public class PageInfo implements Serializable{
 	private int maxPage;
 	private int pageLimit;
 	private int listLimit;
-	
+
 	public PageInfo() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public PageInfo(int totalList, int currentPage, int startPage, int endPage, int maxPage, int pageLimit,
@@ -91,6 +90,5 @@ public class PageInfo implements Serializable{
 				+ ", endPage=" + endPage + ", maxPage=" + maxPage + ", pageLimit=" + pageLimit + ", listLimit="
 				+ listLimit + "]";
 	}
-	
-	
+
 }

@@ -3,18 +3,16 @@ package product.model.vo;
 import java.io.Serializable;
 
 public class Stock implements Serializable {
-//	selectAllStock=select C_CODE, P_THEME, P_NAME, P_CODE, S_CAPA, S_AMOUNT from stock left join product using(P_CODE) order by P_THEME
-	private String cCode;  //센터코드 
-	private String pTheme;  //테마 
-	private String pCategory;  //테마 
-	private String pName;  //상품명 
-	private String pCode;  //상품코드
-	private int sCapa;     //안전재고량
-	private int sAmount;   //재고량
+	private String cCode;
+	private String pTheme;
+	private String pCategory;
+	private String pName;
+	private String pCode;
+	private int sCapa;
+	private int sAmount;
 
 	public Stock() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Stock(String cCode, String pTheme, String pCategory, String pName, String pCode, int sCapa, int sAmount) {
@@ -90,9 +88,4 @@ public class Stock implements Serializable {
 				+ ", pCode=" + pCode + ", sCapa=" + sCapa + ", sAmount=" + sAmount + "]";
 	}
 
-	
-
-	
-
-	
 }

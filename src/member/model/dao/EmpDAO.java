@@ -52,7 +52,6 @@ private Properties prop = new Properties();
 					emp.seteDept(rset.getString("E_DEPT"));
 					emp.setePhone(rset.getString("E_PHONE"));
 					emp.seteEmail(rset.getString("E_EMAIL"));
-//					System.out.println("emp@dao.selectOne = " + emp);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -60,7 +59,6 @@ private Properties prop = new Properties();
 				close(rset);
 				close(pstmt);
 			}
-//		System.out.println("emp@dao=" + emp);
 		return emp;
 	}
 
@@ -82,8 +80,6 @@ private Properties prop = new Properties();
 		} finally {
 			close(pstmt);
 		}
-		
-//		System.out.println("result@dao =" + result);
 		return result;
 	}
 
@@ -106,19 +102,13 @@ private Properties prop = new Properties();
 								  rset.getString("m_contents"), 
 								  rset.getString("m_status"));
 				todo.add(t);
-				
-//				System.out.println("todo@dao = " + t);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		
-//		System.out.println("todoList@dao = " + todo);
-		
 		return todo;
 	}
 
@@ -139,13 +129,10 @@ private Properties prop = new Properties();
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
-				
-		
 		return result;
 	}
 
@@ -160,7 +147,6 @@ private Properties prop = new Properties();
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
@@ -182,13 +168,11 @@ private Properties prop = new Properties();
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
 				
-		
 		return result;
 	}
 
@@ -213,7 +197,6 @@ private Properties prop = new Properties();
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	finally {
 			close(pstmt);

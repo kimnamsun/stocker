@@ -22,64 +22,50 @@ import order.model.vo.Transfer;
 import product.model.vo.BeReleased;
 
 public class BeReleasedDAO {
-private Properties prop = new Properties();
-	
+	private Properties prop = new Properties();
+
 	public BeReleasedDAO() {
 		try {
-			String fileName 
-				= BeReleasedDAO.class
-						  .getResource("/sql/product/product-query.properties")
-						  .getPath();
+			String fileName = BeReleasedDAO.class.getResource("/sql/product/product-query.properties").getPath();
 			prop.load(new FileReader(fileName));
-			
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}	
+		}
 	}
 
 	public List<BeReleased> selectAll(Connection conn, int cPage, int numPerPage) {
 		List<BeReleased> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
+
 		String sql = prop.getProperty("selectAllReleased");
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, (cPage-1)*numPerPage+1);
-			pstmt.setInt(2, cPage*numPerPage);
-			
+
+			pstmt.setInt(1, (cPage - 1) * numPerPage + 1);
+			pstmt.setInt(2, cPage * numPerPage);
+
 			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				BeReleased br = new BeReleased(rset.getString("r_code"), 
-									rset.getString("o_code"), 
-									rset.getString("t_code"), 
-									rset.getString("p_code"),
-									rset.getInt("r_amount"), 
-									rset.getString("r_reason"),
-									rset.getDate("r_date"));
-				
-//				System.out.println("bereleased@dao = " + br);
-				
+
+			while (rset.next()) {
+				BeReleased br = new BeReleased(rset.getString("r_code"), rset.getString("o_code"),
+						rset.getString("t_code"), rset.getString("p_code"), rset.getInt("r_amount"),
+						rset.getString("r_reason"), rset.getDate("r_date"));
+
 				list.add(br);
 			}
-			
-			
-			
-//			System.out.println("list@dao = " + list);
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		
-		
+
 		return list;
 	}
 
@@ -88,12 +74,12 @@ private Properties prop = new Properties();
 		int totalContents = 0;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectBereleasedCount");
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
+
+			while (rset.next()) {
 				totalContents = rset.getInt("cnt");
 			}
 		} catch (SQLException e) {
@@ -102,7 +88,6 @@ private Properties prop = new Properties();
 			close(rset);
 			close(pstmt);
 		}
-//			System.out.println("totalContents@dao=" + totalContents);
 		return totalContents;
 	}
 
@@ -111,7 +96,7 @@ private Properties prop = new Properties();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("searchBereleasedPaging");
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			Calendar cal = Calendar.getInstance();
@@ -119,31 +104,25 @@ private Properties prop = new Properties();
 			cal.setTime(new Date());
 			cal.add(Calendar.DATE, +1);
 			String today = sdf.format(cal.getTime());
-			
-			for(int i = 0; i <= 3; i++) {
-				pstmt.setString(i+1, "%" + ((searchArr[i]).toUpperCase()).trim() + "%");
+
+			for (int i = 0; i <= 3; i++) {
+				pstmt.setString(i + 1, "%" + ((searchArr[i]).toUpperCase()).trim() + "%");
 			}
-					
+
 			pstmt.setString(5, searchArr[4].equals("") ? "2010-01-01" : searchArr[4]);
 			pstmt.setString(6, searchArr[5].equals("") ? today : searchArr[5]);
 			pstmt.setInt(7, (cPage - 1) * numPerPage + 1);
 			pstmt.setInt(8, cPage * numPerPage);
-			
+
 			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				BeReleased br = new BeReleased(rset.getString("r_code"), 
-						rset.getString("o_code"), 
-						rset.getString("t_code"), 
-						rset.getString("p_code"),
-						rset.getInt("r_amount"), 
-						rset.getString("r_reason"),
-						rset.getDate("r_date"));
-	
-			//	System.out.println("bereleased@dao = " + br);
-				
+
+			while (rset.next()) {
+				BeReleased br = new BeReleased(rset.getString("r_code"), rset.getString("o_code"),
+						rset.getString("t_code"), rset.getString("p_code"), rset.getInt("r_amount"),
+						rset.getString("r_reason"), rset.getDate("r_date"));
+
 				list.add(br);
-			} 
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -158,7 +137,7 @@ private Properties prop = new Properties();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("bereleasedFinderTotalContents");
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			Calendar cal = Calendar.getInstance();
@@ -166,15 +145,15 @@ private Properties prop = new Properties();
 			cal.setTime(new Date());
 			cal.add(Calendar.DATE, +1);
 			String today = sdf.format(cal.getTime());
-			
-			for(int i = 0; i <= 3; i++)
-				pstmt.setNString(i+1, "%" + searchArr[i] + "%");
-			
+
+			for (int i = 0; i <= 3; i++)
+				pstmt.setNString(i + 1, "%" + searchArr[i] + "%");
+
 			pstmt.setString(5, searchArr[4].equals("") ? "2010-01-01" : searchArr[4]);
 			pstmt.setString(6, searchArr[5].equals("") ? today : searchArr[5]);
 			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
+
+			if (rset.next()) {
 				totalContents = rset.getInt("cnt");
 			}
 		} catch (SQLException e) {
@@ -183,7 +162,7 @@ private Properties prop = new Properties();
 			close(rset);
 			close(pstmt);
 		}
-		
+
 		return totalContents;
 	}
 

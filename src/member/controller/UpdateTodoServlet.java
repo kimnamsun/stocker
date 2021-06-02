@@ -11,40 +11,26 @@ import javax.servlet.http.HttpServletResponse;
 
 import member.model.service.EmpService;
 
-/**
- * Servlet implementation class TodoStatusChangeServlet
- */
 @WebServlet("/todo/change")
 public class UpdateTodoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UpdateTodoServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public UpdateTodoServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		int m_code = Integer.parseInt(request.getParameter("m_code"));
 		String m_status = request.getParameter("m_status");
-		
 		int result = new EmpService().updateTodo(m_code, m_status);
-		
+
 		PrintWriter out = response.getWriter();
 		out.print(result);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }

@@ -18,34 +18,22 @@ import sales.model.vo.MostSoldProduct;
 import sales.model.vo.RankedShop;
 import sales.model.vo.RankedTransfer;
 
-/**
- * Servlet implementation class SalesServlet
- */
 @WebServlet("/sales")
 public class SalesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public SalesServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1. 인코딩
+	public SalesServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		
+
 		Calendar cal = Calendar.getInstance();
 		int thisYear = cal.get(Calendar.YEAR);
-		int thisMonth = cal.get(Calendar.MONTH)+1;
-		
-		
+		int thisMonth = cal.get(Calendar.MONTH) + 1;
+
 		int countInbound = new SalesService().CountInbound(thisYear, thisMonth);
 		int countOutbound = new SalesService().CountOutbound(thisYear, thisMonth);
 		List<RankedShop> RankedShops = new SalesService().RankingShop(thisYear);
@@ -64,7 +52,7 @@ public class SalesServlet extends HttpServlet {
 		HashMap<Integer, Integer> MonthlyRevenue1 = new RevenueService().MonthlyRevenue1(thisYear);
 		HashMap<String, Integer> DailyRevenue1 = new RevenueService().DailyRevenue1();
 		HashMap<String, Integer> DailyRevenue2 = new RevenueService().DailyRevenue2();
-		
+
 		request.setAttribute("DailyRevenue2", DailyRevenue2);
 		request.setAttribute("DailyRevenue1", DailyRevenue1);
 		request.setAttribute("MonthlyRevenue1", MonthlyRevenue1);
@@ -85,16 +73,12 @@ public class SalesServlet extends HttpServlet {
 		request.setAttribute("countInbound", countInbound);
 		request.setAttribute("thisYear", thisYear);
 		request.setAttribute("thisMonth", thisMonth);
-//		System.out.println(DailyRevenue1);
-		
+
 		request.getRequestDispatcher("/WEB-INF/views/sales/sales.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

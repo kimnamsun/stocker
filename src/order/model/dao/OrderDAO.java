@@ -73,12 +73,8 @@ public class OrderDAO {
 									rset.getString("o_title"),
 									rset.getString("o_comment"));
 				
-//				System.out.println("order@dao = " + o);
-				
 				orderList.add(o);
 			}
-			
-//			System.out.println("orderList@dao = " + orderList);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -86,8 +82,6 @@ public class OrderDAO {
 			close(rset);
 			close(pstmt);
 		}
-		
-		
 		return orderList;
 	}
 
@@ -108,22 +102,15 @@ public class OrderDAO {
 										rset.getString("p_name"), 
 										rset.getString("p_color"), 
 										rset.getString("p_price"));
-				
-//				System.out.println("product@dao = " + p);
-				
 				pList.add(p);
 			}
 			
-//			System.out.println("pList@dao = " + pList);
-			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		
 		
 		return pList;
 	}
@@ -146,11 +133,9 @@ public class OrderDAO {
 										rset.getString("p_name"), 
 										rset.getString("p_color"), 
 										rset.getString("p_price"));
-//				System.out.println("product@dao = " + p);
 				pList.add(p);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -202,7 +187,6 @@ public class OrderDAO {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -226,7 +210,6 @@ public class OrderDAO {
 				listCount = rset.getInt(1);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -261,7 +244,6 @@ public class OrderDAO {
 								  rset.getString("o_comment"));
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -298,7 +280,6 @@ public class OrderDAO {
 				listCount = rset.getInt(1);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -326,7 +307,6 @@ public class OrderDAO {
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
@@ -336,7 +316,6 @@ public class OrderDAO {
 		return result;
 	}
 
-	
 
 	public Product selectOneProduct(Connection conn, String getpCode) 
 	{
@@ -361,7 +340,6 @@ public class OrderDAO {
 								rset.getString("p_price"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return p;
@@ -387,7 +365,6 @@ public class OrderDAO {
 							 rset.getString("s_tel"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
